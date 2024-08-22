@@ -53,104 +53,101 @@ private:
 	//RET
 	void opcode_00EE();
 
-	//SYS addr
-	void opcode_0nnn();
-
 	//JP addr
-	void opcode_1nnn();
+	void opcode_1nnn(uint16_t addr);
 
 	//CALL addr
-	void opcode_2nnn();
+	void opcode_2nnn(uint16_t addr);
 
 	//SE Vx, byte
-	void opcode_3xkk();
+	void opcode_3xkk(uint8_t Vx, uint8_t kk);
 
 	//SNE Vx, byte
-	void opcode_4xkk();
+	void opcode_4xkk(uint8_t Vx, uint8_t kk);
 	
 	//SE Vx, Vy
-	void opcode_5xy0();
+	void opcode_5xy0(uint8_t Vx, uint8_t Vy);
 
 	//LD Vx, byte
-	void opcode_6xkk();
+	void opcode_6xkk(uint8_t Vx, uint8_t kk);
 
 	//ADD Vx, byte
-	void opcode_7xkk();
+	void opcode_7xkk(uint8_t Vx, uint8_t kk);
 
 	//LD Vx, Vy
-	void opcode_8xy0();
+	void opcode_8xy0(uint8_t Vx, uint8_t Vy);
 
 	//OR Vx, Vy
-	void opcode_8xy1();
+	void opcode_8xy1(uint8_t Vx, uint8_t Vy);
 
 	//AND Vx, Vy
-	void opcode_8xy2();
+	void opcode_8xy2(uint8_t Vx, uint8_t Vy);
 
 	//XOR Vx, Vy
-	void opcode_8xy3();
+	void opcode_8xy3(uint8_t Vx, uint8_t Vy);
 
 	//ADD Vx, Vy
-	void opcode_8xy4();
+	void opcode_8xy4(uint8_t Vx, uint8_t Vy);
 
 	//SUB Vx, Vy
-	void opcode_8xy5();
+	void opcode_8xy5(uint8_t Vx, uint8_t Vy);
 
 	//SHR Vx {, Vy}
-	void opcode_8xy6();
+	void opcode_8xy6(uint8_t Vx);
 
 	//SUBN Vx, Vy
-	void opcode_8xy7();
+	void opcode_8xy7(uint8_t Vx, uint8_t Vy);
 	
 	//SHL Vx {, Vy}
-	void opcode_8xyE();
+	void opcode_8xyE(uint8_t Vx);
 
 	//SNE Vx, Vy
-	void opcode_9xy0();
+	void opcode_9xy0(uint8_t Vx, uint8_t Vy);
 
 	//LD I, addr
-	void opcode_Annn();
+	void opcode_Annn(uint16_t addr);
 	
 	//JP V0, addr
-	void opcode_Bnnn();
+	void opcode_Bnnn(uint16_t addr);
 	
 	//RND Vx, byte
-	void opcode_Cxkk();
+	void opcode_Cxkk(uint8_t Vx, uint8_t kk);
 	
 	//DRW Vx, Vy, nibble
-	void opcode_Dxyn();
+	void opcode_Dxyn(uint8_t Vx, uint8_t Vy, uint8_t nibble);
 	
 	//SKP Vx
-	void opcode_Ex9E();
+	void opcode_Ex9E(uint8_t Vx);
 	
 	//SKNP Vx
-	void opcode_ExA1();
+	void opcode_ExA1(uint8_t Vx);
 	
 	//LD Vx, DT
-	void opcode_Fx07();
+	void opcode_Fx07(uint8_t Vx);
 	
 	//LD Vx, K
-	void opcode_Fx0A();
+	void opcode_Fx0A(uint8_t Vx);
 	
 	//LD DT, Vx
-	void opcode_Fx15();
+	void opcode_Fx15(uint8_t Vx);
 	
 	//LD ST, Vx
-	void opcode_Fx18();
+	void opcode_Fx18(uint8_t Vx);
 	
 	//ADD I, Vx
-	void opcode_Fx1E();
+	void opcode_Fx1E(uint8_t Vx);
 	
 	//LD F, Vx
-	void opcode_Fx29();
+	void opcode_Fx29(uint8_t Vx);
 	
 	//LD B, Vx
-	void opcode_Fx33();
+	void opcode_Fx33(uint8_t Vx);
 	
 	//LD [I], Vx
-	void opcode_Fx55();
+	void opcode_Fx55(uint8_t Vx);
 	
 	//LD Vx, [I]
-	void opcode_Fx65();
+	void opcode_Fx65(uint8_t Vx);
 };
 
 #endif // CHIP8_HPP
