@@ -105,7 +105,7 @@ private:
 	void opcode_9xy0(uint8_t Vx, uint8_t Vy);
 
 	//LD I, addr
-	void opcode_Annn(uint16_t addr);
+	void opcode_Annn(uint16_t i, uint16_t addr);
 	
 	//JP V0, addr
 	void opcode_Bnnn(uint16_t addr);

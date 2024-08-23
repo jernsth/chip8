@@ -87,7 +87,6 @@ void Chip8::opcode_3xkk(uint8_t Vx, uint8_t kk) {
 	if(V[Vx] == kk) {
 		PC += 2;
 	}
-	PC += 2;
 }
 
 //Skip next instruction if register Vx not equal to kk
@@ -95,7 +94,6 @@ void Chip8::opcode_4xkk(uint8_t Vx, uint8_t kk) {
 	if(V[Vx] != kk) {
 		PC += 2;
 	}
-	PC += 2;
 }
 
 //Skip next instruction, if register Vx equals to register Vy
@@ -103,43 +101,36 @@ void Chip8::opcode_5xy0(uint8_t Vx, uint8_t Vy) {
 	if(V[Vx] == V[Vy]) {
 		PC += 2;
 	}
-	PC += 2;
 }
 
 //Store value in register
 void Chip8::opcode_6xkk(uint8_t Vx, uint8_t kk) {
 	V[Vx] = kk;
-	PC += 2;
 }
 
 //Add value to register
 void Chip8::opcode_7xkk(uint8_t Vx, uint8_t kk) {
 	V[Vx] += kk;
-	PC += 2;
 }
 
 //Store value from register Vy in register Vx
 void Chip8::opcode_8xy0(uint8_t Vx, uint8_t Vy) {
 	V[Vx] = V[Vy];
-	PC += 2;
 }
 
 //Perform bitwise OR on register Vx and Vy
 void Chip8::opcode_8xy1(uint8_t Vx, uint8_t Vy) {
 	V[Vx] |= V[Vy];
-	PC += 2;
 }
 
 //Perform bitwise AND on register Vx and Vy
 void Chip8::opcode_8xy2(uint8_t Vx, uint8_t Vy) {
 	V[Vx] &= V[Vy];
-	PC += 2;
 }
 
 //Perform bitwise XOR on register Vx and Vy
 void Chip8::opcode_8xy2(uint8_t Vx, uint8_t Vy) {
 	V[Vx] ^= V[Vy];
-	PC += 2;
 }
 
 //Add Vy to Vx, set VF Byte for overflow
@@ -147,28 +138,24 @@ void Chip8::opcode_8xy4(uint8_t Vx, uint8_t Vy) {
 	uint16_t sum = V[Vx] + V[Vy];
     V[15] = (sum > 255) ? 1 : 0;
     V[Vx] = sum & 0xFF;
-    PC += 2;
 }
 
 //Subtract Vy from Vx and store potential negative overflow
 void Chip8::opcode_8xy5(uint8_t Vx, uint8_t Vy) {
 	V[15] = (V[Vx] > V[Vy]) ? 1 : 0;
 	V[Vx] -= V[Vy];
-	PC += 2;
 }
 
 //If the least significant bit is set, then set VF-Flag and shift register right
 void Chip8::opcode_8xy6(uint8_t Vx) {
 	V[15] = ((V[Vx] & 0x01) == 1) ? 1 : 0;
 	V[Vx] >>= 1;
-	PC += 2;
 }
 
 //Subtract Vx from Vy and store potential negative overflow
 void Chip8::opcode_8xy7(uint8_t Vx, uint8_t Vy) {
 	V[15] = (V[Vy] > V[Vx]) ? 1 : 0;
 	V[Vx] = V[Vy] - V[Vx];
-	PC += 2;
 }
 
 //If the most significant bit is set, then set VF-Flag and shift register left
@@ -176,7 +163,34 @@ void Chip8::opcode_8xyE(uint8_t Vx) {
 	uint8_t msb = (V[Vx] >> 7) & 0x01;
 	V[15] = (msb == 1) ? 1 : 0;
 	V[Vx] <<= 1;
-	PC += 2;
+}
+
+//If registers Vx and Vy are unequal, skip next instruction
+void Chip8::opcode_9xy0(uint8_t Vx, uint8_t Vy) {
+	if(V[Vx] != V[Vy]) {
+		PC += 2;
+	}
+}
+
+//Set register I to value addr
+void Chip8::opcode_Annn(uint16_t i, uint16_t addr) {
+	V[i] = addr;
+}
+
+//Program counter is set to addr + value in register V0
+void Chip8::opcode_Bnnn(uint16_t addr) {
+	PC = addr + V[0];
+}
+
+//TBD
+void Chip8::opcode_Dxyn(uint8_t Vx, uint8_t Vy, uint8_t nibble) {
+
+}
+
+void Chip8::opcode_Ex9E(uint8_t Vx) {
+	if(keys[Vx]) {
+		PC += 2;
+	}
 }
 
 void Chip8::drawDisplay() {
