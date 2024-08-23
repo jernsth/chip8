@@ -187,10 +187,49 @@ void Chip8::opcode_Dxyn(uint8_t Vx, uint8_t Vy, uint8_t nibble) {
 
 }
 
+
+//Skip instruction, if key is pressed
 void Chip8::opcode_Ex9E(uint8_t Vx) {
 	if(keys[Vx]) {
 		PC += 2;
 	}
+}
+
+//Skip instruction, if key is not pressed
+void Chip8::opcode_ExA1(uint8_t Vx) {
+	if(!keys[Vx]) {
+		PC += 2;
+	}
+}
+
+//Set register to delay Timer
+void Chip8::opcode_Fx07(uint8_t Vx) {
+	V[Vx] = delayTimer;
+}
+
+//Waits for a key press and stores the value in register Vx
+void Chip8::opcode_Fx0A(uint8_t Vx) {
+	bool brk = false;
+	for(int i=0; i<=15; i++) {
+		if(keys[i]) {
+			V[Vx] = i;
+			brk=true;
+			break;
+		}
+	}
+	if(!brk) {
+		PC -= 2;
+	}
+}
+
+//Set delay timer to value of register
+void Chip8::opcode_Fx15(uint8_t Vx) {
+	delayTimer = V[Vx];
+}
+
+//Set sound timer to value of register
+void Chip8::opcode_Fx18(uint8_t Vx) {
+	soundTimer = V[Vx];
 }
 
 void Chip8::drawDisplay() {
