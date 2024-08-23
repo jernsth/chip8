@@ -232,10 +232,36 @@ void Chip8::opcode_Fx18(uint8_t Vx) {
 	soundTimer = V[Vx];
 }
 
+//Add register Vx to I
+void Chip8::opcode_Fx1E(uint8_t Vx) {
+	I += V[Vx];
+}
+
+void Chip8::opcode_Fx29(uint8_t Vx) {
+
+}
+
+//TBD
+void opcode_Fx33(uint8_t Vx) {
+
+}
+	
+//TBD
+void opcode_Fx55(uint8_t Vx) {
+
+}
+	
+//TBD
+void opcode_Fx65(uint8_t Vx) {
+
+}
+
+//TBD
 void Chip8::drawDisplay() {
 
 }
 
+//TBD
 void Chip8::setKey(uint8_t key, bool pressed) {
 	
 }
